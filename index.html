@@ -10,537 +10,889 @@
 
   <!-- Place the success screen CSS here -->
   <style>
-    /* Success Screen Styles */
-    #successContainer {
-      display: none;
-      width: 100%;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #87CEFA, #00BFFF);
-      color: #fff;
-      text-align: center;
-      padding: 60px 20px;
-      box-sizing: border-box;
-    }
-    #successContainer h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-    #successContainer p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #confettiCanvas {
-      /* If you want a dedicated canvas area for confetti, define it here */
-      width: 100%;
-      height: 200px; /* Adjust as desired */
-    }
-    .success-buttons {
-      margin-top: 20px;
-    }
-    .success-buttons button {
-      background: #fff;
-      color: #00BFFF;
-      border: none;
-      padding: 12px 30px;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      margin: 0 10px;
-      transition: background 0.3s, color 0.3s;
-    }
-    .success-buttons button:hover {
-      background: #00BFFF;
-      color: #fff;
-    }
-  </style>
-</head>
-<body>
-  <!-- Your existing multi-step form and successContainer elements here -->
 
-  <!-- The rest of your code and scripts (multi-step logic, confetti, etc.) -->
-</body>
-</html>
-  <style>
-    /* Basic Reset */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    /* Background */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: url("hd-educational-background.jpg") no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
-    /* Main Form Container */
-    .form-container {
-      background: rgba(255, 255, 255, 0.95);
-      border: 3px solid #87CEFA;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 700px;
-      padding: 40px;
-      margin: 40px auto;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      animation: fadeIn 1s ease;
-      position: relative;
-      z-index: 10;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    /* Logo */
-    .logo { text-align: center; margin-bottom: 10px; }
-    .logo img { max-width: 150px; }
-    h2 { text-align: center; margin-bottom: 20px; color: #444; }
-    /* Progress Bar */
-    .progress-bar {
-      display: flex;
-      margin-bottom: 30px;
-      counter-reset: step;
-      justify-content: space-around;
-    }
-    .progress-step {
-      flex: 1;
-      position: relative;
-      text-align: center;
-      font-size: 12px;
-      color: #aaa;
-    }
-    .progress-step::before {
-      content: counter(step);
-      counter-increment: step;
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-      border: 3px solid #ccc;
-      display: block;
-      text-align: center;
-      margin: 0 auto 10px;
-      border-radius: 50%;
-      background-color: #fff;
-    }
-    .progress-step::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 3px;
-      background: #ccc;
-      top: 15px;
-      left: -50%;
-      z-index: -1;
-    }
-    .progress-step:first-child::after { display: none; }
-    .progress-step-active { color: #87CEFA; }
-    .progress-step-active::before {
-      border-color: #87CEFA;
-      background-color: #87CEFA;
-      color: #fff;
-    }
-    .progress-step-active::after { background-color: #87CEFA; }
-    /* Form Steps */
-    form { position: relative; }
-    .form-step { display: none; animation: slideIn 0.5s ease forwards; }
-    .form-step-active { display: block; }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(50px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .input-group { margin-bottom: 15px; }
-    .input-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-      font-weight: 600;
-    }
-    .input-group input,
-    .input-group select,
-    .input-group textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .button-group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .button-group button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      background: #87CEFA;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .button-group button:hover { background: #00BFFF; }
-    /* Package Cards */
-    .package-card {
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: border 0.3s;
-      margin-bottom: 15px;
-      background: #fafafa;
-    }
-    .package-card.selected {
-      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-    }
-    .package-card:hover {
-      transform: scale(1.05);
-      border-color: #87CEFA;
-      background-color: #e0f7ff;
-    }
-    /* Scheduling Styles */
-    .schedule-header { margin-bottom: 15px; }
-    .schedule-header p {
-      font-size: 18px;
-      margin-bottom: 5px;
-      color: #333;
-      font-weight: 600;
-      display: flex;
-      gap: 5px;
-      align-items: center;
-    }
-    .schedule-header .label {
-      color: #555;
-      text-transform: uppercase;
-      font-size: 14px;
-      letter-spacing: 1px;
-      font-weight: 500;
-    }
-    #scheduleContainer { margin-bottom: 20px; }
-    .schedule-entry {
-      background: #f0f9ff;
-      border: 2px solid #87CEFA;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-    .schedule-entry:hover { transform: translateY(-2px); }
-    .schedule-entry label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-    }
-    .schedule-entry select,
-    .schedule-entry input[type="number"] {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      margin-bottom: 10px;
-      border: 1px solid #87CEFA;
-      border-radius: 4px;
-      background: #fff;
-      font-size: 14px;
-      color: #333;
-      transition: border-color 0.3s ease;
-    }
-    .schedule-entry select:focus,
-    .schedule-entry input[type="number"]:focus {
-      outline: none;
-      border-color: #00BFFF;
-    }
-    .schedule-entry button {
-      background: #e74c3c;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 6px 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      font-size: 14px;
-    }
-    .schedule-entry button:hover { background: #c0392b; }
-    .schedule-summary {
-      margin-top: 20px;
-      padding: 15px;
-      background-color: #eef;
-      border-radius: 6px;
-      font-size: 14px;
-      color: #333;
-      line-height: 1.6;
-    }
-    /* Download PDF Button */
-    .download-pdf-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .download-pdf-container button {
-      background: #87CEFA;
-      border: none;
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    .download-pdf-container button:hover {
-      background: #00BFFF;
-      transform: translateY(-2px);
-    }
-    /* Table Styling in Final Summary */
-    table.schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-    table.schedule-table thead {
-      background: #87CEFA;
-      color: #fff;
-    }
-    table.schedule-table th,
-    table.schedule-table td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-    table.schedule-table tbody tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    /* Custom "Add a Day" Button */
-    #addSchedule {
-      display: inline-block;
-      background: #87CEFA;
-      color: #fff;
-      padding: 12px 30px;
-      font-size: 16px;
-      font-weight: 600;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      margin-bottom: 20px;
-    }
-    #addSchedule:hover {
-      background: #00BFFF;
-      transform: translateY(-2px);
-    }
-    /* Step 5: Review & Submit Styling */
-    #step-5 h3 {
-      margin-bottom: 15px;
-      font-size: 20px;
-      color: #444;
-    }
-    #finalSummary { margin-bottom: 20px; }
+    /* --------------------------------------------------
+   Responsive Adjustments with Media Queries
+-----------------------------------------------------*/
 
-    /* Step 2: Center Previous Button and remove Next button */
-    #step-2 .button-group {
-      display: flex;
-      justify-content: center;
-    }
-    #step-2 .btn-prev {
-      margin: 0 auto;
-    }
-    #step-2 .btn-next {
-      display: none;
-    }
+/* For medium-large screens (tablets and small desktops) */
+@media (max-width: 1200px) {
+  .form-container {
+    width: 95%;
+    padding: 30px;
+    margin: 30px auto;
+  }
+  .progress-step {
+    font-size: 11px;
+  }
+  .progress-step::before {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+  }
+}
 
-    /* ---------- Payment Container ---------- */
-    .payment-container {
-      background: #fff;
-      max-width: 900px;
-      width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-wrap: wrap;
-      margin: 20px auto;
-      animation: fadeIn 0.8s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    /* ---------- Left Side: Amount Display ---------- */
-    .amount-display {
-      flex: 1;
-      padding: 30px;
-      background: linear-gradient(135deg, #87CEFA, #005f99);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-    }
-    .amount-display h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    /* ---------- Right Side: Payment Card/Form ---------- */
-    .payment-card {
-      flex: 2;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .payment-card h3 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-      color: #333;
-    }
-    /* ---------- Form Groups & Labels ---------- */
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #444;
-    }
-    /* ---------- Card Input Wrapper ---------- */
-    .card-input-wrapper {
-      position: relative;
-    }
-    .card-input-wrapper input {
-      width: 100%;
-      padding: 12px 40px 12px 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card-input-wrapper input:focus {
-      border-color: #87CEFA;
-      box-shadow: 0 0 5px rgba(135, 206, 250, 0.5);
-    }
-    /* ---------- Card Brand Icon ---------- */
-    .card-brand-icon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 4px;
-    }
-    .card-brand-icon .circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: #87CEFA;
-    }
-    /* ---------- Flex Row for Expiry and CVV ---------- */
-    .flex-row {
-      display: flex;
-      gap: 10px;
-    }
-    .flex-row > * {
-      flex: 1;
-    }
-    .flex-row select,
-    .flex-row input[type="password"] {
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .flex-row select:focus,
-    .flex-row input[type="password"]:focus {
-      border-color: #87CEFA;
-      box-shadow: 0 0 5px rgba(135, 206, 250, 0.5);
-    }
-    /* ---------- Pay Button ---------- */
-    .pay-btn {
-      width: 100%;
-      background-color: #87CEFA;
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-      margin-top: 10px;
-    }
-    .pay-btn:hover {
-      background-color: #00BFFF;
-      transform: translateY(-2px);
-    }
-    /* ---------- Alternative Payment Methods ---------- */
-    .payment-methods {
-      margin-top: 30px;
-    }
-    .payment-methods h3 {
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-      text-align: center;
-      color: #333;
-    }
-    .methods {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .methods button {
-      background: #fff;
-      color: #333;
-      border: 1px solid #ccc;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .methods button:hover {
-      background: #f5f5f5;
-      transform: translateY(-2px);
-    }
-    /* ---------- Previous Button Container ---------- */
-    .btn-prev-container {
-      text-align: center;
-      width: 100%;
-      margin: 20px 0;
-    }
-    .btn-prev {
-      background: #87CEFA;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-    .btn-prev:hover {
-      background: #00BFFF;
-      transform: translateY(-2px);
-    }
-    /* ---------- Responsive Adjustments ---------- */
-    @media (max-width: 768px) {
-      .payment-container {
-        flex-direction: column;
-      }
-      .amount-display, .payment-card {
-        padding: 20px;
-      }
-      .amount-display h2 {
-        font-size: 1.8rem;
-      }
+/* For tablets and large phones (up to 768px) */
+@media (max-width: 768px) {
+  .form-container {
+    width: 95%;
+    padding: 20px;
+    margin: 20px auto;
+  }
+  .logo img {
+    max-width: 120px;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  /* Make progress bar more vertical */
+  .progress-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .progress-step {
+    font-size: 12px;
+  }
+  .progress-step::before {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+  }
+  /* Adjust package card and schedule entry styling */
+  .package-card {
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  .schedule-entry {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+  /* Make button groups stack vertically */
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  /* Adjust table font size for better readability */
+  table.schedule-table {
+    font-size: 12px;
+  }
+}
 
-    }
+/* For small mobile devices (up to 480px) */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 15px;
+    margin: 10px auto;
+  }
+  .logo img {
+    max-width: 100px;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  /* Input labels and fields get slightly smaller */
+  .input-group label,
+  .schedule-header p,
+  .schedule-entry label {
+    font-size: 0.9rem;
+  }
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    padding: 8px;
+  }
+  /* Buttons become a bit smaller */
+  .button-group button,
+  .download-pdf-container button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  /* Adjust progress indicator sizes */
+  .progress-step::before {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 10px;
+  }
+  .progress-step {
+    font-size: 10px;
+  }
+}
+
+/* Global Centering (For taller screens) */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure the form container remains centered */
+.form-container {
+  margin: auto;
+}
+
+/* -----------------------------
+   Success Screen Styles
+------------------------------*/
+#successContainer {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #87CEFA, #00BFFF);
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+#successContainer h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+#successContainer p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#confettiCanvas {
+  /* If you want a dedicated canvas area for confetti, define it here */
+  width: 100%;
+  height: 200px;
+}
+.success-buttons {
+  margin-top: 20px;
+}
+.success-buttons button {
+  background: #fff;
+  color: #00BFFF;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background 0.3s, color 0.3s;
+}
+.success-buttons button:hover {
+  background: #00BFFF;
+  color: #fff;
+}
+
+/* -----------------------------
+   Basic Reset
+------------------------------*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* -----------------------------
+   Background
+------------------------------*/
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url("hd-educational-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+}
+
+/* -----------------------------
+   Main Form Container
+------------------------------*/
+.form-container {
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid #87CEFA;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 700px;
+  padding: 40px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 1s ease;
+  position: relative;
+  z-index: 10;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* -----------------------------
+   Logo
+------------------------------*/
+.logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.logo img {
+  max-width: 150px;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* -----------------------------
+   Progress Bar (Desktop Default)
+------------------------------*/
+.progress-bar {
+  display: flex;
+  margin-bottom: 30px;
+  counter-reset: step;
+  justify-content: space-around;
+}
+.progress-step {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+}
+.progress-step::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 3px solid #ccc;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.progress-step::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: #ccc;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progress-step:first-child::after {
+  display: none;
+}
+.progress-step-active {
+  color: #87CEFA;
+}
+.progress-step-active::before {
+  border-color: #87CEFA;
+  background-color: #87CEFA;
+  color: #fff;
+}
+.progress-step-active::after {
+  background-color: #87CEFA;
+}
+
+/* -----------------------------
+   Form Steps
+------------------------------*/
+form {
+  position: relative;
+}
+.form-step {
+  display: none;
+  animation: slideIn 0.5s ease forwards;
+}
+.form-step-active {
+  display: block;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.input-group {
+  margin-bottom: 15px;
+}
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: 600;
+}
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.button-group button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background: #87CEFA;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.button-group button:hover {
+  background: #00BFFF;
+}
+
+/* -----------------------------
+   Package Cards
+------------------------------*/
+.package-card {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border 0.3s;
+  margin-bottom: 15px;
+  background: #fafafa;
+}
+.package-card.selected {
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.package-card:hover {
+  transform: scale(1.05);
+  border-color: #87CEFA;
+  background-color: #e0f7ff;
+}
+
+/* -----------------------------
+   Scheduling Styles
+------------------------------*/
+.schedule-header {
+  margin-bottom: 15px;
+}
+.schedule-header p {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 600;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.schedule-header .label {
+  color: #555;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+#scheduleContainer {
+  margin-bottom: 20px;
+}
+.schedule-entry {
+  background: #f0f9ff;
+  border: 2px solid #87CEFA;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+.schedule-entry:hover {
+  transform: translateY(-2px);
+}
+.schedule-entry label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+.schedule-entry select,
+.schedule-entry input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #87CEFA;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+.schedule-entry select:focus,
+.schedule-entry input[type="number"]:focus {
+  outline: none;
+  border-color: #00BFFF;
+}
+.schedule-entry button {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 14px;
+}
+.schedule-entry button:hover {
+  background: #c0392b;
+}
+.schedule-summary {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #eef;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* -----------------------------
+   Download PDF Button
+------------------------------*/
+.download-pdf-container {
+  text-align: center;
+  margin-top: 20px;
+}
+.download-pdf-container button {
+  background: #87CEFA;
+  border: none;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.download-pdf-container button:hover {
+  background: #00BFFF;
+  transform: translateY(-2px);
+}
+
+/* -----------------------------
+   Table Styling in Final Summary
+------------------------------*/
+table.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
+}
+table.schedule-table thead {
+  background: #87CEFA;
+  color: #fff;
+}
+table.schedule-table th,
+table.schedule-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+table.schedule-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* -----------------------------
+   Custom "Add a Day" Button
+------------------------------*/
+#addSchedule {
+  display: inline-block;
+  background: #87CEFA;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+}
+#addSchedule:hover {
+  background: #00BFFF;
+  transform: translateY(-2px);
+}
+
+/* -----------------------------
+   Step 5: Review & Submit Styling
+------------------------------*/
+#step-5 h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #444;
+}
+#finalSummary {
+  margin-bottom: 20px;
+}
+
+/* -----------------------------
+   Step 2: Center Previous Button & Remove Next Button
+------------------------------*/
+#step-2 .button-group {
+  display: flex;
+  justify-content: center;
+}
+#step-2 .btn-prev {
+  margin: 0 auto;
+}
+#step-2 .btn-next {
+  display: none;
+}
+
+/* -----------------------------
+   Payment Container & Related Styles
+------------------------------*/
+.payment-container {
+  background: #fff;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  animation: fadeIn 0.8s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.amount-display {
+  flex: 1;
+  padding: 30px;
+  background: linear-gradient(135deg, #87CEFA, #005f99);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.amount-display h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.payment-card {
+  flex: 2;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.payment-card h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+.card-input-wrapper {
+  position: relative;
+}
+.card-input-wrapper input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card-input-wrapper input:focus {
+  border-color: #87CEFA;
+  box-shadow: 0 0 5px rgba(135, 206, 250, 0.5);
+}
+.card-brand-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 4px;
+}
+.card-brand-icon .circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #87CEFA;
+}
+.flex-row {
+  display: flex;
+  gap: 10px;
+}
+.flex-row > * {
+  flex: 1;
+}
+.flex-row select,
+.flex-row input[type="password"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.flex-row select:focus,
+.flex-row input[type="password"]:focus {
+  border-color: #87CEFA;
+  box-shadow: 0 0 5px rgba(135, 206, 250, 0.5);
+}
+.pay-btn {
+  width: 100%;
+  background-color: #87CEFA;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
+}
+.pay-btn:hover {
+  background-color: #00BFFF;
+  transform: translateY(-2px);
+}
+.payment-methods {
+  margin-top: 30px;
+}
+.payment-methods h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #333;
+}
+.methods {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.methods button {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.methods button:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+}
+.btn-prev-container {
+  text-align: center;
+  width: 100%;
+  margin: 20px 0;
+}
+.btn-prev {
+  background: #87CEFA;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.btn-prev:hover {
+  background: #00BFFF;
+  transform: translateY(-2px);
+}
+
+/* -----------------------------
+   Responsive Adjustments with Media Queries
+------------------------------*/
+
+/* For medium-large screens (up to 1200px) */
+@media (max-width: 1200px) {
+  .form-container {
+    width: 95%;
+    padding: 30px;
+    margin: 30px auto;
+  }
+  .progress-step {
+    font-size: 11px;
+  }
+  .progress-step::before {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+  }
+}
+
+/* For tablets and large phones (up to 768px) */
+@media (max-width: 768px) {
+  .form-container {
+    width: 95%;
+    padding: 20px;
+    margin: 20px auto;
+  }
+  .logo img {
+    max-width: 120px;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  /* Simplify the progress indicator for mobile:
+     Hide every progress step except the active one */
+  .progress-bar .progress-step:not(.progress-step-active) {
+    display: none;
+  }
+  .progress-step.progress-step-active {
+    display: block;
+  }
+  .progress-step.progress-step-active::before {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.2rem;
+    margin: 0 auto 5px auto;
+  }
+  .progress-step.progress-step-active::after {
+    display: none;
+  }
+  .package-card {
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  .schedule-entry {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  table.schedule-table {
+    font-size: 12px;
+  }
+}
+
+/* For small mobile devices (up to 480px) */
+@media (max-width: 768px) {
+  /* Remove any default numbering from ::before on mobile */
+  .progress-step::before {
+    content: none !important;
+  }
+  
+  /* Give every progress step a circular shape, centered text, etc. */
+  .progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* If you want inactive steps hidden, let your JS hide them or do display:none in CSS.
+       For now, let's just show them with a neutral style. */
+    background: transparent;
+    color: #fff;
+    display: inline-flex;    /* or flex if you prefer block layout */
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin: 0 auto;          /* optional: horizontally center the circle */
+  }
+
+  /* The active step gets the light blue fill with white text */
+  .progress-step.progress-step-active {
+    background: #87CEFA;  /* or any light-blue shade you prefer */
+    color: #fff;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 15px;
+    margin: 10px auto;
+  }
+  .logo img {
+    max-width: 100px;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .input-group label,
+  .schedule-header p,
+  .schedule-entry label {
+    font-size: 0.9rem;
+  }
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    padding: 8px;
+  }
+  .button-group button,
+  .download-pdf-container button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  /* For small phones, also hide all non-active progress steps */
+  .progress-bar .progress-step:not(.progress-step-active) {
+    display: none;
+  }
+  .progress-step.progress-step-active {
+    display: block;
+  }
+  .progress-step.progress-step-active::before {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+}
+
+/* -----------------------------
+   New Small-Height Media Query
+   (Ensures top logo and title remain visible on screens
+    such as 1024x600, 540x720, 360x740, 390x844, and 375x667)
+------------------------------*/
+@media (max-height: 700px) {
+  /* Remove vertical centering to avoid content being cut off */
+  body {
+    align-items: flex-start;
+    padding-top: 20px;
+    overflow-y: auto;
+  }
+  /* Limit the container's height to fit within the viewport */
+  .form-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-height: calc(100% - 40px);
+    overflow-y: auto;
+  }
+  /* Scale down the logo and title for smaller heights */
+  .logo img {
+    max-width: 100px;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+
+
   </style>
 
 <head>
@@ -872,425 +1224,442 @@
         }
       });
       
-      /***********************
-       * EXISTING CODE (MULTI-STEP FORM, PACKAGE SELECTION, ETC.)
-       ***********************/
-      
-      const form = document.getElementById("multiStepForm");
-      const formSteps = document.querySelectorAll(".form-step");
-      const btnNext = document.querySelectorAll(".btn-next");
-      const btnPrev = document.querySelectorAll(".btn-prev");
-      const progressSteps = document.querySelectorAll(".progress-step");
-      
-      let currentStep = 0;
-      let totalPackageHours = 0;
-      let remainingHours = 0;
-      let scheduleData = [];
-      
-      const dayNameToNumber = {
-        "Monday": 1,
-        "Tuesday": 2,
-        "Wednesday": 3,
-        "Thursday": 4,
-        "Friday": 5,
-        "Saturday": 6
-      };
-      
-      btnNext.forEach(button => {
-        button.addEventListener("click", () => {
-          if (validateStep(currentStep)) {
-            if (currentStep === 4) {
-              processApplicationSuccess();
-            } else {
-              currentStep++;
-              updateFormSteps();
-              updateProgressBar();
-              if (currentStep === 4) {
-                updateFinalSummary();
-              }
-            }
-          }
-        });
-      });
-      
-      btnPrev.forEach(button => {
-        button.addEventListener("click", () => {
-          // When leaving scheduling (Step 3) reset the "Add a Day" button
-          if (currentStep === 2) {
-            document.getElementById("addSchedule").disabled = false;
-          }
-          currentStep--;
-          updateFormSteps();
-          updateProgressBar();
-        });
-      });
-      
-      function updateFormSteps() {
-        formSteps.forEach((formStep, index) => {
-          formStep.classList.toggle("form-step-active", index === currentStep);
-        });
+ /***********************
+ * EXISTING CODE (MULTI-STEP FORM, PACKAGE SELECTION, ETC.)
+ ***********************/
+
+/***********************
+ * EXISTING CODE (MULTI-STEP FORM, PACKAGE SELECTION, ETC.)
+ ***********************/
+
+ const form = document.getElementById("multiStepForm");
+ const formSteps = document.querySelectorAll(".form-step");
+ const btnNext = document.querySelectorAll(".btn-next");
+ const btnPrev = document.querySelectorAll(".btn-prev");
+ const progressSteps = document.querySelectorAll(".progress-step");
+ 
+ let currentStep = 0;
+ let totalPackageHours = 0;
+ let remainingHours = 0;
+ let scheduleData = [];
+ 
+ const dayNameToNumber = {
+   "Monday": 1,
+   "Tuesday": 2,
+   "Wednesday": 3,
+   "Thursday": 4,
+   "Friday": 5,
+   "Saturday": 6
+ };
+ 
+ btnNext.forEach(button => {
+   button.addEventListener("click", () => {
+     if (validateStep(currentStep)) {
+       if (currentStep === 4) {
+         processApplicationSuccess();
+       } else {
+         currentStep++;
+         updateFormSteps();
+         updateProgressBar();
+         if (currentStep === 4) {
+           updateFinalSummary();
+         }
+       }
+     }
+   });
+ });
+ 
+ btnPrev.forEach(button => {
+   button.addEventListener("click", () => {
+     // When leaving scheduling (Step 3) reset the "Add a Day" button
+     if (currentStep === 2) {
+       document.getElementById("addSchedule").disabled = false;
+     }
+     currentStep--;
+     updateFormSteps();
+     updateProgressBar();
+   });
+ });
+ 
+ function updateFormSteps() {
+   formSteps.forEach((formStep, index) => {
+     formStep.classList.toggle("form-step-active", index === currentStep);
+   });
+ }
+ 
+ // Updated updateProgressBar function:
+ // For mobile devices (window.innerWidth <= 768), we remove any existing content
+ // and then set only the current progress step's text to (currentStep + 1).
+ // For larger screens, we use your previous logic (marking all steps up to and including currentStep as active).
+ function updateProgressBar() {
+  if (window.innerWidth <= 768) {
+    // Mobile: remove any text/counters, then show only current step's number
+    progressSteps.forEach((step, index) => {
+      step.classList.remove("progress-step-active");
+      step.textContent = "";  // Clear any old text
+      if (index === currentStep) {
+        step.classList.add("progress-step-active");
+        step.textContent = (currentStep + 1); // e.g. if currentStep=3 => "4"
       }
-      
-      function updateProgressBar() {
-        progressSteps.forEach((progressStep, index) => {
-          if (index <= currentStep) {
-            progressStep.classList.add("progress-step-active");
-          } else {
-            progressStep.classList.remove("progress-step-active");
-          }
-        });
+    });
+  } else {
+    // Desktop: mark all steps up to current as active, so you get a timeline
+    progressSteps.forEach((step, index) => {
+      if (index <= currentStep) {
+        step.classList.add("progress-step-active");
+      } else {
+        step.classList.remove("progress-step-active");
       }
-      
-      function validateStep(stepIndex) {
-        const currentFormStep = formSteps[stepIndex];
-        const inputs = currentFormStep.querySelectorAll("input, select, textarea");
-        for (let input of inputs) {
-          if (!input.checkValidity()) {
-            input.reportValidity();
-            return false;
-          }
-        }
-        return true;
-      }
-    
-        /***********************
-         * PACKAGE SELECTION (STEP 2)
-         ***********************/
-        let currentSelectedPackage = null;
-        const packageCards = document.querySelectorAll(".package-card");
-        packageCards.forEach(card => {
-          card.addEventListener("click", () => {
-            const rawPrice = card.getAttribute("data-price");
-            const numericPrice = Number(rawPrice.replace(/[^0-9.]/g, ''));
-            localStorage.setItem("packagePrice", numericPrice);
-    
-            const newPackageId = card.getAttribute("data-package-id") || card.getAttribute("data-hours");
-            if (currentSelectedPackage === newPackageId) {
-              currentStep = 2;
-              updateFormSteps();
-              updateProgressBar();
-              return;
-            }
-    
-            packageCards.forEach(c => c.classList.remove("selected"));
-            card.classList.add("selected");
-    
-            totalPackageHours = parseInt(card.getAttribute("data-hours"));
-            remainingHours = totalPackageHours;
-            document.getElementById("totalHours").innerText = totalPackageHours;
-            document.getElementById("remainingHours").innerText = remainingHours;
-            document.getElementById("selectedPackageHours").value = totalPackageHours;
-            document.getElementById("selectedPackagePrice").value = rawPrice;
-            document.getElementById("toSchedule").disabled = false;
-    
-            document.getElementById("scheduleContainer").innerHTML = '';
-            document.getElementById("scheduleSummary").innerHTML = '';
-            scheduleData = [];
-    
-            currentSelectedPackage = newPackageId;
-            currentStep = 2;
-            updateFormSteps();
-            updateProgressBar();
-          });
-        });
-    
-        /***********************
-         * SCHEDULING (STEP 3)
-         ***********************/
-        // Initially enable "Add a Day"
-        document.getElementById("addSchedule").disabled = false;
-        
-        // Function to check whether the "Add a Day" button should be enabled.
-        // It is enabled only if there are fewer than 2 entries and the last entry (if exists)
-        // is complete and valid (hours must be exactly 2 or 4).
-       // Function to check if the "Add a Day" button should be enabled.
-function checkAddDayButton() {
-  const addDayButton = document.getElementById("addSchedule");
-  // Filter out removed (null) entries
-  const validEntries = scheduleData.filter(entry => entry !== null);
-  
-  // If no valid entries exist, enable the button.
-  if (validEntries.length === 0) {
-    addDayButton.disabled = false;
-    return;
-  }
-  
-  // If one valid entry exists, enable the button only if that entry is complete.
-  if (validEntries.length === 1) {
-    const entry = validEntries[0];
-    if (entry.subject && entry.day && entry.time && (entry.hours === 2 || entry.hours === 4)) {
-      addDayButton.disabled = false;
-    } else {
-      addDayButton.disabled = true;
-    }
-    return;
-  }
-  
-  // If two or more valid entries exist, disable the button.
-  if (validEntries.length >= 2) {
-    addDayButton.disabled = true;
+    });
   }
 }
 
-// Function to remove a schedule entry and re-check the add day button.
-function removeScheduleEntry(id) {
-  const entryDiv = document.querySelector(`[data-entry-id="${id}"]`);
-  if (entryDiv) {
-    // Remove the entry visually and mark its slot as null.
-    entryDiv.remove();
-    scheduleData[id] = null;
-    updateRemainingHours();
-    updateScheduleSummary();
-    // Re-check the "Add a Day" button.
-    checkAddDayButton();
-  }
-}
+ 
+ function validateStep(stepIndex) {
+   const currentFormStep = formSteps[stepIndex];
+   const inputs = currentFormStep.querySelectorAll("input, select, textarea");
+   for (let input of inputs) {
+     if (!input.checkValidity()) {
+       input.reportValidity();
+       return false;
+     }
+   }
+   return true;
+ }
+ 
+ /***********************
+  * PACKAGE SELECTION (STEP 2)
+  ***********************/
+ let currentSelectedPackage = null;
+ const packageCards = document.querySelectorAll(".package-card");
+ packageCards.forEach(card => {
+   card.addEventListener("click", () => {
+     const rawPrice = card.getAttribute("data-price");
+     const numericPrice = Number(rawPrice.replace(/[^0-9.]/g, ''));
+     localStorage.setItem("packagePrice", numericPrice);
+ 
+     const newPackageId = card.getAttribute("data-package-id") || card.getAttribute("data-hours");
+     if (currentSelectedPackage === newPackageId) {
+       currentStep = 2;
+       updateFormSteps();
+       updateProgressBar();
+       return;
+     }
+ 
+     packageCards.forEach(c => c.classList.remove("selected"));
+     card.classList.add("selected");
+ 
+     totalPackageHours = parseInt(card.getAttribute("data-hours"));
+     remainingHours = totalPackageHours;
+     document.getElementById("totalHours").innerText = totalPackageHours;
+     document.getElementById("remainingHours").innerText = remainingHours;
+     document.getElementById("selectedPackageHours").value = totalPackageHours;
+     document.getElementById("selectedPackagePrice").value = rawPrice;
+     document.getElementById("toSchedule").disabled = false;
+ 
+     document.getElementById("scheduleContainer").innerHTML = '';
+     document.getElementById("scheduleSummary").innerHTML = '';
+     scheduleData = [];
+ 
+     currentSelectedPackage = newPackageId;
+     currentStep = 2;
+     updateFormSteps();
+     updateProgressBar();
+   });
+ });
+ 
+ /***********************
+  * SCHEDULING (STEP 3)
+  ***********************/
+ // Initially enable "Add a Day"
+ document.getElementById("addSchedule").disabled = false;
+ 
+ // Function to check whether the "Add a Day" button should be enabled.
+ function checkAddDayButton() {
+   const addDayButton = document.getElementById("addSchedule");
+   // Filter out removed (null) entries
+   const validEntries = scheduleData.filter(entry => entry !== null);
+   
+   // If no valid entries exist, enable the button.
+   if (validEntries.length === 0) {
+     addDayButton.disabled = false;
+     return;
+   }
+   
+   // If one valid entry exists, enable the button only if that entry is complete.
+   if (validEntries.length === 1) {
+     const entry = validEntries[0];
+     if (entry.subject && entry.day && entry.time && (entry.hours === 2 || entry.hours === 4)) {
+       addDayButton.disabled = false;
+     } else {
+       addDayButton.disabled = true;
+     }
+     return;
+   }
+   
+   // If two or more valid entries exist, disable the button.
+   if (validEntries.length >= 2) {
+     addDayButton.disabled = true;
+   }
+ }
+ 
+ // Function to remove a schedule entry and re-check the add day button.
+ function removeScheduleEntry(id) {
+   const entryDiv = document.querySelector(`[data-entry-id="${id}"]`);
+   if (entryDiv) {
+     // Remove the entry visually and mark its slot as null.
+     entryDiv.remove();
+     scheduleData[id] = null;
+     updateRemainingHours();
+     updateScheduleSummary();
+     // Re-check the "Add a Day" button.
+     checkAddDayButton();
+   }
+ }
+ 
+ document.getElementById("addSchedule").addEventListener("click", () => {
+   if (remainingHours <= 0) {
+     alert("You've allocated all available hours.");
+     return;
+   }
+   // Check maximum entries (2 allowed)
+   if (scheduleData.filter(entry => entry !== null).length >= 2) {
+     alert("You can only add two days.");
+     return;
+   }
+   checkAddDayButton();
+   if (document.getElementById("addSchedule").disabled) {
+     alert("Please complete the current schedule entry with 2 or 4 hours before adding another day.");
+     return;
+   }
+   addScheduleEntry();
+   checkAddDayButton();
+   document.getElementById("toStartDay").disabled = false;
+ });
+ 
+ function getPhysicalAllowedDays() {
+   return ["Friday", "Saturday"];
+ }
+ function getPhysicalAllowedTimes(day) {
+   if (day === "Friday") {
+     return ["15:00", "17:00"];
+   } else if (day === "Saturday") {
+     return ["13:00", "15:00"];
+   }
+   return [];
+ }
+ function getSubjectAllowedDays(subject) {
+   switch(subject) {
+     case "Mathematics":
+     case "Mathematics Literacy":
+       return ["Monday", "Tuesday", "Saturday"];
+     case "Physics":
+       return ["Wednesday", "Thursday", "Saturday"];
+     case "Afrikaans":
+     case "English":
+       return ["Monday", "Tuesday", "Saturday"];
+     default:
+       return [];
+   }
+ }
+ function getSubjectAllowedTimes(subject, day) {
+   if (day !== "Saturday") {
+     return ["15:00", "17:00"];
+   } else {
+     if (subject === "Mathematics" || subject === "Mathematics Literacy") {
+       return ["09:00", "11:00"];
+     } else if (subject === "Physics" || subject === "Afrikaans" || subject === "English") {
+       return ["11:00", "13:00"];
+     }
+   }
+   return [];
+ }
+ function isPhysicalPackage() {
+   const selectedCard = document.querySelector(".package-card.selected");
+   if (!selectedCard) return false;
+   return selectedCard.getAttribute("data-session-type") === "physical";
+ }
+ 
+ function addScheduleEntry() {
+   const entryId = scheduleData.length;
+   const scheduleContainer = document.getElementById("scheduleContainer");
+   const entryDiv = document.createElement("div");
+   entryDiv.classList.add("schedule-entry");
+   entryDiv.setAttribute("data-entry-id", entryId);
+   entryDiv.innerHTML = `
+     <label>Select Subject:
+       <select class="schedule-subject" required>
+         <option value="">-- Choose Subject --</option>
+         <option value="Mathematics">Mathematics</option>
+         <option value="Mathematics Literacy">Mathematics Literacy</option>
+         <option value="Physics">Physics</option>
+         <option value="Afrikaans">Afrikaans</option>
+         <option value="English">English</option>
+       </select>
+     </label>
+     <label>Select Day:
+       <select class="schedule-day" required>
+         <option value="">-- Choose Subject First --</option>
+       </select>
+     </label>
+     <label>Number of Hours (must be 2 or 4):
+       <input type="number" class="schedule-hours" min="2" step="2" required>
+     </label>
+     <label>Select Start Time:
+       <select class="schedule-time" required>
+         <option value="">-- Choose Day First --</option>
+       </select>
+     </label>
+     <button type="button" class="remove-btn">Remove</button>
+   `;
+   scheduleContainer.appendChild(entryDiv);
+   
+   // Add a new schedule entry object
+   scheduleData.push({ subject: "", day: "", hours: 0, time: "" });
+   
+   const subjectSelect = entryDiv.querySelector(".schedule-subject");
+   const daySelect = entryDiv.querySelector(".schedule-day");
+   const hoursInput = entryDiv.querySelector(".schedule-hours");
+   const timeSelect = entryDiv.querySelector(".schedule-time");
+   const removeButton = entryDiv.querySelector(".remove-btn");
+   
+   subjectSelect.addEventListener("change", () => {
+     scheduleData[entryId].subject = subjectSelect.value;
+     // Reset day and time for a fresh start
+     scheduleData[entryId].day = "";
+     scheduleData[entryId].time = "";
+     daySelect.innerHTML = '<option value="">-- Choose Day --</option>';
+     timeSelect.innerHTML = '<option value="">-- Choose Day First --</option>';
+     let allowedDays = [];
+     if (isPhysicalPackage()) {
+       allowedDays = getPhysicalAllowedDays();
+     } else {
+       allowedDays = getSubjectAllowedDays(subjectSelect.value);
+     }
+     allowedDays.forEach(d => {
+       const opt = document.createElement("option");
+       opt.value = d;
+       opt.textContent = d;
+       daySelect.appendChild(opt);
+     });
+     updateScheduleSummary();
+     checkAddDayButton();
+   });
+   
+   daySelect.addEventListener("change", () => {
+     scheduleData[entryId].day = daySelect.value;
+     scheduleData[entryId].time = "";
+     timeSelect.innerHTML = '<option value="">-- Choose Time --</option>';
+     let allowedTimes = [];
+     if (isPhysicalPackage()) {
+       allowedTimes = getPhysicalAllowedTimes(daySelect.value);
+     } else {
+       allowedTimes = getSubjectAllowedTimes(subjectSelect.value, daySelect.value);
+     }
+     // If another entry already uses the same day, filter out times already selected
+     allowedTimes = allowedTimes.filter(timeOption => {
+       return !scheduleData.some((entry, idx) => 
+         idx !== entryId && entry && entry.day === daySelect.value && entry.time === timeOption
+       );
+     });
+     allowedTimes.forEach(t => {
+       const opt = document.createElement("option");
+       opt.value = t;
+       opt.textContent = t;
+       timeSelect.appendChild(opt);
+     });
+     updateScheduleSummary();
+     checkAddDayButton();
+   });
+   
+   hoursInput.addEventListener("change", () => {
+     let newVal = parseInt(hoursInput.value) || 0;
+   
+     // Validate hours must be exactly 2 or 4 (and not 0)
+     if (newVal !== 2 && newVal !== 4) {
+       alert("Hours must be exactly 2 or 4.");
+       newVal = 0;
+     }
+     hoursInput.value = newVal;
+     scheduleData[entryId].hours = newVal;
+     updateRemainingHours();
+     updateScheduleSummary();
+     checkAddDayButton();
+   });
+   
+   hoursInput.addEventListener("input", () => {
+     let newVal = parseInt(hoursInput.value) || 0;
+     if (newVal > remainingHours) {
+       newVal = remainingHours;
+     }
+     hoursInput.value = newVal;
+     scheduleData[entryId].hours = newVal;
+     updateRemainingHours();
+     updateScheduleSummary();
+     checkAddDayButton();
+   });
+   
+   timeSelect.addEventListener("change", () => {
+     scheduleData[entryId].time = timeSelect.value;
+     updateScheduleSummary();
+     checkAddDayButton();
+   });
+   
+   removeButton.addEventListener("click", () => {
+     removeScheduleEntry(entryId);
+     checkAddDayButton();
+   });
+ }
+ 
+ function removeScheduleEntry(id) {
+   const entryDiv = document.querySelector(`[data-entry-id="${id}"]`);
+   if (entryDiv) {
+     scheduleData[id].hours = 0;
+     updateRemainingHours();
+     entryDiv.remove();
+     scheduleData[id] = null;
+     updateScheduleSummary();
+ 
+     // Check if all entries have been removed
+     const hasEntriesLeft = scheduleData.some(entry => entry !== null && entry.hours > 0);
+     
+     // If nothing is left, allow the user to start over by enabling the button
+     if (!hasEntriesLeft) {
+       scheduleData = []; // clear scheduleData
+       document.getElementById("addSchedule").disabled = false;
+     }
+     checkAddDayButton();
+   }
+ }
+ 
+ function updateRemainingHours() {
+   const allocated = scheduleData.reduce((sum, entry) => sum + (entry ? entry.hours : 0), 0);
+   remainingHours = totalPackageHours - allocated;
+   document.getElementById("remainingHours").innerText = remainingHours;
+ }
+ 
+ function updateScheduleSummary() {
+   const summaryDiv = document.getElementById("scheduleSummary");
+   const hasEntries = scheduleData.some(entry => entry && entry.subject && entry.day && entry.hours && entry.time);
+ 
+   if (!hasEntries) {
+     summaryDiv.innerHTML = "<strong>Schedule Summary (First Week):</strong><br>";
+     return;
+   }
+ 
+   summaryDiv.innerHTML = "<strong>Schedule Summary (First Week):</strong><br>";
+   scheduleData.forEach((entry, index) => {
+     if (entry && entry.subject && entry.day && entry.hours && entry.time) {
+       summaryDiv.innerHTML += `Entry ${index + 1}: ${entry.subject} on ${entry.day} for ${entry.hours} hour(s) starting at ${entry.time}<br>`;
+     }
+   });
+ }
+ 
+ /***********************
+  * STEP 4: STARTING DAY LOGIC
+  ***********************/
+ 
 
-        
-        document.getElementById("addSchedule").addEventListener("click", () => {
-          if (remainingHours <= 0) {
-            alert("You've allocated all available hours.");
-            return;
-          }
-          // Check maximum entries (2 allowed)
-          if (scheduleData.filter(entry => entry !== null).length >= 2) {
-            alert("You can only add two days.");
-            return;
-          }
-          checkAddDayButton();
-          if (document.getElementById("addSchedule").disabled) {
-            alert("Please complete the current schedule entry with 2 or 4 hours before adding another day.");
-            return;
-          }
-          addScheduleEntry();
-          checkAddDayButton();
-          document.getElementById("toStartDay").disabled = false;
-        });
-    
-        function getPhysicalAllowedDays() {
-          return ["Friday", "Saturday"];
-        }
-        function getPhysicalAllowedTimes(day) {
-          if (day === "Friday") {
-            return ["15:00", "17:00"];
-          } else if (day === "Saturday") {
-            return ["13:00", "15:00"];
-          }
-          return [];
-        }
-        function getSubjectAllowedDays(subject) {
-          switch(subject) {
-            case "Mathematics":
-            case "Mathematics Literacy":
-              return ["Monday", "Tuesday", "Saturday"];
-            case "Physics":
-              return ["Wednesday", "Thursday", "Saturday"];
-            case "Afrikaans":
-            case "English":
-              return ["Monday", "Tuesday", "Saturday"];
-            default:
-              return [];
-          }
-        }
-        function getSubjectAllowedTimes(subject, day) {
-          if (day !== "Saturday") {
-            return ["15:00", "17:00"];
-          } else {
-            if (subject === "Mathematics" || subject === "Mathematics Literacy") {
-              return ["09:00", "11:00"];
-            } else if (subject === "Physics" || subject === "Afrikaans" || subject === "English") {
-              return ["11:00", "13:00"];
-            }
-          }
-          return [];
-        }
-        function isPhysicalPackage() {
-          const selectedCard = document.querySelector(".package-card.selected");
-          if (!selectedCard) return false;
-          return selectedCard.getAttribute("data-session-type") === "physical";
-        }
-        
-        function addScheduleEntry() {
-          const entryId = scheduleData.length;
-          const scheduleContainer = document.getElementById("scheduleContainer");
-          const entryDiv = document.createElement("div");
-          entryDiv.classList.add("schedule-entry");
-          entryDiv.setAttribute("data-entry-id", entryId);
-          entryDiv.innerHTML = `
-            <label>Select Subject:
-              <select class="schedule-subject" required>
-                <option value="">-- Choose Subject --</option>
-                <option value="Mathematics">Mathematics</option>
-                <option value="Mathematics Literacy">Mathematics Literacy</option>
-                <option value="Physics">Physics</option>
-                <option value="Afrikaans">Afrikaans</option>
-                <option value="English">English</option>
-              </select>
-            </label>
-            <label>Select Day:
-              <select class="schedule-day" required>
-                <option value="">-- Choose Subject First --</option>
-              </select>
-            </label>
-            <label>Number of Hours (must be 2 or 4):
-              <input type="number" class="schedule-hours" min="2" step="2" required>
-            </label>
-            <label>Select Start Time:
-              <select class="schedule-time" required>
-                <option value="">-- Choose Day First --</option>
-              </select>
-            </label>
-            <button type="button" class="remove-btn">Remove</button>
-          `;
-          scheduleContainer.appendChild(entryDiv);
-          
-          // Add a new schedule entry object
-          scheduleData.push({ subject: "", day: "", hours: 0, time: "" });
-          
-          const subjectSelect = entryDiv.querySelector(".schedule-subject");
-          const daySelect = entryDiv.querySelector(".schedule-day");
-          const hoursInput = entryDiv.querySelector(".schedule-hours");
-          const timeSelect = entryDiv.querySelector(".schedule-time");
-          const removeButton = entryDiv.querySelector(".remove-btn");
-          
-          subjectSelect.addEventListener("change", () => {
-            scheduleData[entryId].subject = subjectSelect.value;
-            // Reset day and time for a fresh start
-            scheduleData[entryId].day = "";
-            scheduleData[entryId].time = "";
-            daySelect.innerHTML = '<option value="">-- Choose Day --</option>';
-            timeSelect.innerHTML = '<option value="">-- Choose Day First --</option>';
-            let allowedDays = [];
-            if (isPhysicalPackage()) {
-              allowedDays = getPhysicalAllowedDays();
-            } else {
-              allowedDays = getSubjectAllowedDays(subjectSelect.value);
-            }
-            allowedDays.forEach(d => {
-              const opt = document.createElement("option");
-              opt.value = d;
-              opt.textContent = d;
-              daySelect.appendChild(opt);
-            });
-            updateScheduleSummary();
-            checkAddDayButton();
-          });
-          
-          daySelect.addEventListener("change", () => {
-            scheduleData[entryId].day = daySelect.value;
-            scheduleData[entryId].time = "";
-            timeSelect.innerHTML = '<option value="">-- Choose Time --</option>';
-            let allowedTimes = [];
-            if (isPhysicalPackage()) {
-              allowedTimes = getPhysicalAllowedTimes(daySelect.value);
-            } else {
-              allowedTimes = getSubjectAllowedTimes(subjectSelect.value, daySelect.value);
-            }
-            // If another entry already uses the same day, filter out times already selected
-            allowedTimes = allowedTimes.filter(timeOption => {
-              return !scheduleData.some((entry, idx) => 
-                idx !== entryId && entry && entry.day === daySelect.value && entry.time === timeOption
-              );
-            });
-            allowedTimes.forEach(t => {
-              const opt = document.createElement("option");
-              opt.value = t;
-              opt.textContent = t;
-              timeSelect.appendChild(opt);
-            });
-            updateScheduleSummary();
-            checkAddDayButton();
-          });
-          
-          hoursInput.addEventListener("change", () => {
-            let newVal = parseInt(hoursInput.value) || 0;
-          
-            // Validate hours must be exactly 2 or 4 (and not 0)
-            if (newVal !== 2 && newVal !== 4) {
-              alert("Hours must be exactly 2 or 4.");
-              newVal = 0;
-            }
-            hoursInput.value = newVal;
-            scheduleData[entryId].hours = newVal;
-            updateRemainingHours();
-            updateScheduleSummary();
-            checkAddDayButton();
-          });
-          
-          hoursInput.addEventListener("input", () => {
-            let newVal = parseInt(hoursInput.value) || 0;
-            if (newVal > remainingHours) {
-              newVal = remainingHours;
-            }
-            hoursInput.value = newVal;
-            scheduleData[entryId].hours = newVal;
-            updateRemainingHours();
-            updateScheduleSummary();
-            checkAddDayButton();
-          });
-          
-          timeSelect.addEventListener("change", () => {
-            scheduleData[entryId].time = timeSelect.value;
-            updateScheduleSummary();
-            checkAddDayButton();
-          });
-          
-          removeButton.addEventListener("click", () => {
-            removeScheduleEntry(entryId);
-            checkAddDayButton();
-          });
-        }
-        
-        function removeScheduleEntry(id) {
-          const entryDiv = document.querySelector(`[data-entry-id="${id}"]`);
-          if (entryDiv) {
-            scheduleData[id].hours = 0;
-            updateRemainingHours();
-            entryDiv.remove();
-            scheduleData[id] = null;
-            updateScheduleSummary();
-        
-            // ✅ Check if all entries have been removed
-            const hasEntriesLeft = scheduleData.some(entry => entry !== null && entry.hours > 0);
-            
-            // ✅ If nothing is left, allow the user to start over by enabling the button
-            if (!hasEntriesLeft) {
-              scheduleData = []; // clear scheduleData
-              document.getElementById("addSchedule").disabled = false;
-            }
-        
-            checkAddDayButton();
-          }
-        }
-        
-        
-        function updateRemainingHours() {
-          const allocated = scheduleData.reduce((sum, entry) => sum + (entry ? entry.hours : 0), 0);
-          remainingHours = totalPackageHours - allocated;
-          document.getElementById("remainingHours").innerText = remainingHours;
-        }
-        
-        function updateScheduleSummary() {
-          const summaryDiv = document.getElementById("scheduleSummary");
-          const hasEntries = scheduleData.some(entry => entry && entry.subject && entry.day && entry.hours && entry.time);
-        
-          if (!hasEntries) {
-            summaryDiv.innerHTML = "<strong>Schedule Summary (First Week):</strong><br>";
-            return;
-          }
-        
-          summaryDiv.innerHTML = "<strong>Schedule Summary (First Week):</strong><br>";
-          scheduleData.forEach((entry, index) => {
-            if (entry && entry.subject && entry.day && entry.hours && entry.time) {
-              summaryDiv.innerHTML += `Entry ${index + 1}: ${entry.subject} on ${entry.day} for ${entry.hours} hour(s) starting at ${entry.time}<br>`;
-            }
-          });
-        }
-        
-        
-        /***********************
-         * STEP 4: STARTING DAY LOGIC
-         ***********************/
         const today = new Date();
         const isoToday = today.toISOString().split('T')[0];
         document.getElementById("startDay").min = isoToday;
@@ -1661,4 +2030,5 @@ function removeScheduleEntry(id) {
         
       }); // End of DOMContentLoaded
     </script>
+    
     
